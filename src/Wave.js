@@ -23,7 +23,21 @@ const Wave = {
   },
 
   load (audio) {
+    console.log(audio)
     this.ws.load(audio)
+    return new Promise(resolve => {
+      this.ws.on('ready', () => {
+        this.ws.enableDragSelection({
+          loop: false
+        })
+        resolve()
+      })
+    })
+  },
+
+  load2 (file) {
+    console.log(file)
+    this.ws.loadBlob(file)
     return new Promise(resolve => {
       this.ws.on('ready', () => {
         this.ws.enableDragSelection({

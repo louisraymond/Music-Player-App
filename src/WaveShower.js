@@ -4,6 +4,7 @@ import PlayPauseButton from './PlayPauseButton'
 import LoadFileButton from './LoadFileButton'
 import StopButton from './StopButton'
 import StartButton from './StartButton'
+import SelectFileButton from './SelectFileButton'
 
 
 class WaveShower extends React.Component {
@@ -21,6 +22,11 @@ class WaveShower extends React.Component {
     Wave.load(newurl).then(() => Wave.play())
   }
 
+  handleLoad2 = (files) =>{
+    console.log(files)
+    Wave.load2(files[0]).then(() => Wave.play())
+  }
+
   render() {
     return (
       <div className="App" id='app'>
@@ -29,6 +35,7 @@ class WaveShower extends React.Component {
           <StartButton/>
           <StopButton/>
           <PlayPauseButton/>
+          <SelectFileButton handleClick= {this.handleLoad2}/>
           <LoadFileButton handleClick= {this.handleLoad}/>
 
       </div>
