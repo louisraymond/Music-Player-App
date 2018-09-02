@@ -5,6 +5,7 @@ import LoadFileButton from './LoadFileButton'
 import StopButton from './StopButton'
 import StartButton from './StartButton'
 import SelectFileButton from './SelectFileButton'
+import SpeedSetter from './SpeedSetter'
 
 
 class WaveShower extends React.Component {
@@ -35,6 +36,7 @@ class WaveShower extends React.Component {
           <StartButton/>
           <StopButton/>
           <PlayPauseButton/>
+          <SpeedSetter/>
           <SelectFileButton handleClick= {this.handleLoad2}/>
           <LoadFileButton handleClick= {this.handleLoad}/>
 

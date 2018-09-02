@@ -1,12 +1,14 @@
 import WaveSurfer from 'wavesurfer.js'
 import RegionsPlugin from 'wavesurfer.js/dist/plugin/wavesurfer.regions.js'
 import TimelinePlugin from 'wavesurfer.js/dist/plugin/wavesurfer.timeline.min.js'
+import SoundTouch from './SoundTouch'
 
 const Wave = {
   mount () {
     this.ws = WaveSurfer.create({
       waveColor: 'violet',
       progressColor: 'purple',
+      backend: 'MediaElement',
       container: '#wave',
       plugins: [
         RegionsPlugin.create(),
@@ -102,6 +104,7 @@ const Wave = {
 
   setPlaybackRate (rate) {
     this.ws.setPlaybackRate(rate)
+
      // Sets the speed of playback (0.5 is half speed, 1 is normal speed, 2 is double speed and so on).
   }
 
