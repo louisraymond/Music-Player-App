@@ -10,15 +10,12 @@ class SelectFileButton extends React.Component {
 
   }
 
-  handleFile(files,rejectedFiles) {
-      console.log(files)
-      Wave.load2(files)
-  }
+  
 
   render(){
   return (
     <div>
-    <Dropzone onDrop = {this.props.handleClick} /> 
+    <Dropzone onDrop = {this.props.handleClick} />
     </div>
   )}
 }

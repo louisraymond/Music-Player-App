@@ -1,7 +1,7 @@
 import WaveSurfer from 'wavesurfer.js'
 import RegionsPlugin from 'wavesurfer.js/dist/plugin/wavesurfer.regions.js'
 import TimelinePlugin from 'wavesurfer.js/dist/plugin/wavesurfer.timeline.min.js'
-import SoundTouch from './SoundTouch'
+import soundtouch from './SoundTouch.js'
 
 const Wave = {
   mount () {
@@ -50,7 +50,15 @@ const Wave = {
     })
   },
 
+  load3 (file) {
+    this.ws.loadBlob(file)
+  },
+
   play () {
+
+  },
+
+  beforePlay () {
   },
 
   //
