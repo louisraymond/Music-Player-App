@@ -7,35 +7,86 @@ import WaveShower from './WaveShower.js'
 import Nav from './Nav'
 import { BrowserRouter as Router, Route, Link, Switch, withRouter } from 'react-router-dom'
 import AuthAction from './auth/AuthAction'
-import createUser  from './adapter'
+import {createUser, loginUser, getCurrentUser, getCurrentSongList }  from './adapter'
+import ReactFilestack from 'filestack-react';
 
 
 class App extends React.Component {
 
   state = {
-    user: null
+    user: null,
   }
 
-  SignUp = (username,password) => {
-    createUser(username,password).then(data => {
+  postAuth = user => {
+    if (user.error){
+      alert(user.error)
+    }else {
+       this.afterLogIn()
+       localStorage.setItem('token',user.token)
+       this.updateCurrentUser(localStorage.getItem('token'))
+     }
+   }
 
+   updateCurrentUser = (token)  => {
+     if (token) {
+       getCurrentUser(token).then(data => {
+         if (data.error) {
+           this.logout()
+         } else {
+           this.setState({
+             user: data
+           })
+         }
+       })
+     }
+   }
+
+
+
+   
+   componentDidMount(){
+     if (localStorage.getItem('token')) {
+       this.updateCurrentUser(localStorage.getItem('token'))
+     }
+            this.afterLogIn()
+       }
+
+
+
+  signUp = (username,password) => {
+    createUser(username,password).then(this.postAuth)
+  }
+
+  signIn = (username, password) => {
+    loginUser(username,password).then(user => this.postAuth(user))
+  }
+
+  afterLogIn = () => {
+    this.props.history.push('/')
+  }
+
+  logout = () => {
+    this.setState({
+      user : null
     })
+    this.props.history.push('/signin')
+    localStorage.clear
   }
 
   render () {
     return (
 
-      <React.Fragment>
-        <Nav user={this.state.user} />
-        <Route exact path='/' component={WaveShower} />
+      <div className='container'>
+        <Nav user={this.state.user} logout={this.logout} />
+        <Route exact path='/' render={() => <WaveShower user={this.state.user}/>} />
         <Route exact path='/signup' render={() => {
-          return <AuthAction header='Sign Up' submit={this.SignUp} />
+          return <AuthAction header='Sign Up' submit={this.signUp} />
         }} />
         <Route exact path='/signin' render={() => {
-          return <AuthAction header='Sign In' />
+          return <AuthAction header='Sign In' submit={this.signIn}/>
         }} />
 
-      </React.Fragment>
+    </div>
     )
   }
 }

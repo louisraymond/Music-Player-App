@@ -3,15 +3,15 @@ import Wave from './Wave.js'
 
 const SpeedSetter = (props) => {
   return (
-    <div>
+    <div >
 
       <form onSubmit={(e) => {
         e.preventDefault()
         Wave.setPlaybackRate(e.target.url.value)
       }}>
 
-        <input type='text' name='url' />
-        <button> Set Playback Rate</button>
+        <input className='rounded' type='text' name='url' />
+        <button className='myButton'> Set Playback Rate</button>
       </form>
     </div>)
 }

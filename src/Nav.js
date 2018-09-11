@@ -9,8 +9,8 @@ const Nav = (props) => {
       </div>
       {props.user ?
         <React.Fragment>
-          <div> Welcome {props.user}</div>
-          <Link className='item' to='/'> Log Out</Link>
+          <div> Welcome {props.user.username}</div>
+          <Link className='item' to='/' onClick={props.logout}> Log Out</Link>
         </React.Fragment>
         :
         <React.Fragment>

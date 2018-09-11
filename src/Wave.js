@@ -4,10 +4,11 @@ import TimelinePlugin from 'wavesurfer.js/dist/plugin/wavesurfer.timeline.min.js
 import soundtouch from './SoundTouch.js'
 
 const Wave = {
+
   mount () {
     this.ws = WaveSurfer.create({
-      waveColor: 'violet',
-      progressColor: 'purple',
+      waveColor: '#6c7f9a',
+      progressColor: '#f1f0f4',
       backend: 'MediaElement',
       container: '#wave',
       plugins: [
@@ -55,7 +56,7 @@ const Wave = {
   },
 
   play () {
-
+    this.ws.play()
   },
 
   beforePlay () {
@@ -63,16 +64,29 @@ const Wave = {
 
   //
 
-  playPause () {
+  play () {
     // Plays if paused, pauses if playing.
     // if (region is selected)
+    let current = this.ws.getCurrentTime()
     if (Object.keys(this.ws.regions.list).length > 0) {
       const region = this.ws.regions.list[Object.keys(this.ws.regions.list)[0]]
-      this.ws.play(region.start)
+      if (current > region.start) {
+        this.ws.play(current)
+      } else {
+        this.ws.play(region.start)
+      }
       region.on('out', () => { this.ws.play(region.start) })
     } else {
       this.ws.play()
     }
+  },
+
+  playPause () {
+    this.ws.playPause()
+  },
+
+  clearRegion () {
+    this.ws.clearRegions()
   },
 
   empty () {
@@ -108,6 +122,10 @@ const Wave = {
   stop () {
     this.ws.stop()
      // Stops and goes to the beginning
+  },
+
+  pause () {
+    this.ws.pause()
   },
 
   setPlaybackRate (rate) {
