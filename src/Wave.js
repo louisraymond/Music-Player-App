@@ -70,7 +70,7 @@ const Wave = {
     let current = this.ws.getCurrentTime()
     if (Object.keys(this.ws.regions.list).length > 0) {
       const region = this.ws.regions.list[Object.keys(this.ws.regions.list)[0]]
-      if (current > region.start) {
+      if (current > region.start && !(current > region.end)) {
         this.ws.play(current)
       } else {
         this.ws.play(region.start)

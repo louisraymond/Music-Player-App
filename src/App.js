@@ -43,7 +43,7 @@ class App extends React.Component {
 
 
 
-   
+
    componentDidMount(){
      if (localStorage.getItem('token')) {
        this.updateCurrentUser(localStorage.getItem('token'))
@@ -70,15 +70,26 @@ class App extends React.Component {
       user : null
     })
     this.props.history.push('/signin')
-    localStorage.clear
+    localStorage.clear()
   }
+
+  updateUserSongs = (newSong) => {
+    let mutableUser=this.state.user
+    mutableUser.songs=[...mutableUser.songs,newSong]
+    this.setState({
+      user:mutableUser
+    })
+  }
+
+
+   
 
   render () {
     return (
 
       <div className='container'>
         <Nav user={this.state.user} logout={this.logout} />
-        <Route exact path='/' render={() => <WaveShower user={this.state.user}/>} />
+        <Route exact path='/' render={() => <WaveShower user={this.state.user} updateUserSongs={this.updateUserSongs}/>} />
         <Route exact path='/signup' render={() => {
           return <AuthAction header='Sign Up' submit={this.signUp} />
         }} />

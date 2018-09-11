@@ -3,6 +3,35 @@
 }
 
 body {}
+.titleholder{
+  background: #516074;
+  transition: 200ms ease-in;
+
+}
+.titleholder:hover{
+  background: rgba(255, 255, 255, 0.9);
+  transition: 200ms ease-in;
+
+}
+
+.Subtitle{
+  font-family: 'Pacifico', cursive;
+  text-align: center
+}
+.title{
+  font-family: 'Pacifico', cursive;
+
+    border: solid black 2px;
+    color: rgba(255, 255, 255, 0.9);
+    transition: 200ms ease-in;
+}
+
+.title:hover{
+  font-family: 'Pacifico', cursive;
+    border: solid black 2px;
+    color: #516074;
+    transition: 200ms ease-in;
+}
 
 .container {
   max-width: 800px;
@@ -15,6 +44,7 @@ body {}
 
 .controls {
   border: solid black 2px;
+
 }
 
 /* .filePick {

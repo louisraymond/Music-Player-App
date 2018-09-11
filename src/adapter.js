@@ -1,3 +1,4 @@
+
 const API_ROOT = 'http://localhost:3001/api/v1'
 
 const createUser = (username, password) => {
@@ -46,7 +47,7 @@ const postSong = (song) => {
       url: song.url,
       name: song.name,
       user_id: song.user_id})
-  }).then(res => res.json())
+  }).then(() => getCurrentSongList())
 }
 
 const getCurrentUser = (token) => {

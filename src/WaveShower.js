@@ -11,6 +11,7 @@ import SongList from './SongList'
 import ClearRegion from './ClearRegion'
 import {postSong} from './adapter'
 import PauseButton from './PauseButton'
+import App from './App'
 
 class WaveShower extends React.Component {
 
@@ -59,32 +60,45 @@ class WaveShower extends React.Component {
       fileList: [...this.state.fileList,songObj]
     })
     postSong(songObj)
+    this.props.updateUserSongs(songObj)
   }
 
   changeSong(url) {
     Wave.load(url)
   }
 
+  hasName(){
+    if (this.props.user ===null){
+      return 'Log In or Sign Up'
+    }else{
+      return this.props.user.username
+    }
+  }
+
   render() {
     return (
       <div className="App" id='app'>
+        <h2 className='Subtitle'>Welcome {this.hasName()}!</h2>
         <div id="wave-timeline" />
         <div id="wave"></div>
+        <br></br>
         <div className='controls'>
         <ClearRegion/>
           <PlayPauseButton/>
           <PauseButton/>
+            <div className='filePick' />
+            <SpeedSetter />
+              <ReactFilestack
+                  buttonClass='controlButton'
+                  apikey={'AWh70tvFLR4SOl2D5lbS0z'}
+                  onSuccess={this.onSuccess}
+                  onError={this.onError}
+                />
           </div>
-          <div className='filePick' />
-          <SpeedSetter />
-
-          <ReactFilestack
-              buttonClass='myButton'
-              apikey={'AKwaqKoHLSWKWuFhfFX4Nz'}
-              onSuccess={this.onSuccess}
-              onError={this.onError}
-            />
+          
           <div/>
+            <div style={{height: "10px"}}></div>
+            <h1 className='Subtitle'>Song List</h1>
           <SongList songList={this.songlister()} changeSong={this.changeSong} />
       </div>
     );

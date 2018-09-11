@@ -4,7 +4,7 @@ import './index.css'
 import App from './App'
 import registerServiceWorker from './registerServiceWorker'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
-
+import 'react-input-range/lib/css/index.css'
 ReactDOM.render(
   <Router>
     <App />
