@@ -18,10 +18,13 @@ const Wave = {
         })
       ]
     })
-    this.ws.on('region-created', () => {
+    this.ws.on('region-created', (e) => {
       if (Object.keys(this.ws.regions.list).length > 0) {
         Object.values(this.ws.regions.list)[0].remove()
       }
+    })
+    this.ws.on('region-in', (e) => {
+      Wave.play()
     })
   },
 
@@ -53,10 +56,6 @@ const Wave = {
 
   load3 (file) {
     this.ws.loadBlob(file)
-  },
-
-  play () {
-    this.ws.play()
   },
 
   beforePlay () {

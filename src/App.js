@@ -75,10 +75,16 @@ class App extends React.Component {
 
   updateUserSongs = (newSong) => {
     let mutableUser=this.state.user
+    let songnames=this.state.user.songs.map( song => song.name)
+    console.log (songnames)
+    if (!songnames.includes(newSong.name)){
     mutableUser.songs=[...mutableUser.songs,newSong]
     this.setState({
       user:mutableUser
-    })
+    }  
+  )}else{
+      alert("Song With Same Name Already Included!")
+    }
   }
 
 

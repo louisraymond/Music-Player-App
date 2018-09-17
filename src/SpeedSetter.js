@@ -29,8 +29,10 @@ class SpeedSetter extends React.Component {
         </div>
         <form onSubmit={(e) => {
           e.preventDefault()
+          if (!(isNaN(e.target.url.value)) && (e.target.url.value <= 3) && (e.target.url.value >= 0)){
           this.setState({ speed:e.target.url.value })
           Wave.setPlaybackRate(e.target.url.value)
+        }
         }}>
           <input className='rounded' type='text' name='url' />
           <button className='controlButton'> Set Playback Rate</button>

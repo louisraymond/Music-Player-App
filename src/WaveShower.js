@@ -49,6 +49,8 @@ class WaveShower extends React.Component {
     alert("This don't work")
   }
 
+
+
   onSuccess = (file) => {
     let songObj={
       url:`https://cdn.filestackcontent.com/${file.filesUploaded[0].handle}`,
@@ -75,13 +77,10 @@ class WaveShower extends React.Component {
     }
   }
 
-  render() {
-    return (
-      <div className="App" id='app'>
-        <h2 className='Subtitle'>Welcome {this.hasName()}!</h2>
-        <div id="wave-timeline" />
-        <div id="wave"></div>
-        <br></br>
+  renderChanger(){
+    if(this.props.user){
+      return(
+        <React.Fragment>
         <div className='controls'>
         <ClearRegion/>
           <PlayPauseButton/>
@@ -90,16 +89,40 @@ class WaveShower extends React.Component {
             <SpeedSetter />
               <ReactFilestack
                   buttonClass='controlButton'
-                  apikey={'AWh70tvFLR4SOl2D5lbS0z'}
+                  apikey={'AXr8XbylTPCTXJxnu1nuoz'}
                   onSuccess={this.onSuccess}
                   onError={this.onError}
                 />
           </div>
-          
+
           <div/>
             <div style={{height: "10px"}}></div>
             <h1 className='Subtitle'>Song List</h1>
           <SongList songList={this.songlister()} changeSong={this.changeSong} />
+          </React.Fragment>
+      )
+    }
+    else{
+      return <div className='Subtitle'>
+        <h3 className='Subtitle'> Instructions</h3>
+        <p>
+        <li>Sign in and Upload a file to begin.</li>  
+      <li>  Click on the Waveform to play a different part of your tune</li>
+      <li>Drag over the waveform to loop</li>
+        
+        </p>
+      </div>
+    }
+  }
+
+  render() {
+    return (
+      <div className="App" id='app'>
+        <h2 className='Subtitle'>Welcome {this.hasName()}!</h2>
+        <div id="wave-timeline" />
+        <div id="wave"></div>
+        <br></br>
+        {this.renderChanger()}
       </div>
     );
   }
